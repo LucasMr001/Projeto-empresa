@@ -37,8 +37,15 @@ app.post('/userlog', function(req, res){
 })
 app.get('/empresa', function(req,res){
     Usuario.findAll({order: [['id', 'DESC']]}).then(function(listaUsuarios){
-        console.log(listaUsuarios)
         res.render('home', {listaUsuarios: listaUsuarios})
+    })
+})
+app.get('/deletar/:id', function(req, res){
+    Usuario.destroy({where: {id: req.params.id}}).then(function(){
+        res.redirect('/empresa');
+        console.log(`Usuario deletado`)
+    }).catch(function(erro){
+        console.log(`Ocorreu o erro ${erro}`)
     })
 })
 
