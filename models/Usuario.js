@@ -15,6 +15,7 @@ const Usuario = db.sequelize.define('empresa_git', {
     }
 })
 
-Usuario.sync({force:true})
+// Cria tabela sempre que executa:
+//Usuario.sync({force:true})
 
 module.exports = Usuario
