@@ -1,16 +1,10 @@
 const db = require('./db')
 
-const Usuario = db.sequelize.define('empresa_git', {
-    nome: {
+const Usuario = db.sequelize.define('usuarios', {
+    user: {
         type: db.Sequelize.STRING
     },
-    idade: {
-        type: db.Sequelize.INTEGER
-    },
-    email: {
-        type: db.Sequelize.STRING
-    },
-    sexo: {
+    senha: {
         type: db.Sequelize.STRING
     }
 })
