@@ -1,0 +1,15 @@
+{
+  "name": "projeto-empresa",
+  "version": "1.0.0",
+  "description": "Este é um projeto da disciplina de Gerência e Controle de Mudanças da faculdade IFPB. Ele inclui uma interface para login e registro, além de funcionalidades para adicionar, remover, modificar e pesquisar usuários. O sistema é desenvolvido com HTML, CSS, JavaScript para o frontend, e Node.js com MySQL para o backend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
