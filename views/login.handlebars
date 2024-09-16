@@ -1,9 +1,21 @@
 
 <!-- Imprime o form de login para o usuário e encaminha para um /userlog-->
-<form action="userlog" method="post"> <!-- method post esconde as informações do usuario-->
+<form action="confirmlogin" method="post"> <!-- method post esconde as informações do usuario-->
     <p>Login:</p>
     <input type="text" name="username" placeholder="Nome de usuário">
     <input type="password" name="senha" placeholder="Digite a senha">
-    <button type="submit">Entrar</button>
-    <p>Novo por aqui? <a href="http://localhost:8922/registro">Cadastre-se</a></p>
+    <button type="submit" class="button">Entrar</button>
+    <p>Novo por aqui? <a href="http://localhost:8922/register">Cadastre-se</a></p>
 </form>
+
+<script>
+    const btn = document.querySelector('.button');
+
+    btn.addEventListener('click', function(){
+    let username = document.getElementsByName("username")[0].value
+    let senha = document.getElementsByName("senha")[0].value
+    if(!senha || !username){
+        alert('preencha todos os campos antes de continuar')
+        }
+    })
+</script>
