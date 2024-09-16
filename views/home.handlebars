@@ -1,0 +1,8 @@
+<p>Olá, USUARIO! Bem-vindo ao programa EMPRESA</p>
+
+{{#each listaUsuarios}}
+    <h3>{{user}}</h3>
+    <a href='/deletar/{{id}}'><button>Deletar</button></a><br>
+    <small>{{id}}</small>
+    <hr>
+{{/each}}
