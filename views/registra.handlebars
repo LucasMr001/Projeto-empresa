@@ -5,6 +5,21 @@
     <input type="text" name="username" placeholder="Nome de usuário">
     <input type="password" name="senha" placeholder="Digite a senha">
     <input type="password" name="senhaconfirm" placeholder="Confirma a senha">
-    <button type="submit">Cadastrar</button>
-    <p>Já possui uma conta? <a href="http://localhost:8922/login">Entrar</a></p>
+    <button type="submit" class="button">Cadastrar</button>
+    <p>Já possui uma conta? <a href="/login">Entrar</a></p>
 </form>
+
+<script>
+    const btn = document.querySelector('.button');
+
+    btn.addEventListener('click', function(){
+    let username = document.getElementsByName("username")[0].value
+    let senha = document.getElementsByName("senha")[0].value
+    let senhaconfirm = document.getElementsByName("senhaconfirm")[0].value
+    if(!senha || !username || !senhaconfirm){
+        alert('preencha todos os campos antes de continuar')
+        }else if(senha!=senhaconfirm){
+        alert('As senhas não coincidem')
+    }
+    })
+</script>

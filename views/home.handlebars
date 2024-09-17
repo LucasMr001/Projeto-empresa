@@ -1,8 +1,37 @@
-<p>Olá, USUARIO! Bem-vindo ao programa EMPRESA</p>
+<p style="font-size: larger;">
+    Olá, <i><b>{{user_logado}}</b></i>! Aqui está a lista de todos os usuários cadastrados!
+    <a href="/login"><button>voltar</button></a>
+</p>
 
 {{#each listaUsuarios}}
-    <h3>{{user}}</h3>
-    <a href='/deletar/{{id}}'><button>Deletar</button></a><br>
-    <small>{{id}}</small>
-    <hr>
+    <div class="users" data-user="{{user}}" data-id="{{id}}">
+        <img src="{{photo}}" style="height: 90px; border-radius: 50px;" onload="chamar('{{user}}')">
+        <h3 class="h3">{{user}}</h3>
+        <a href='/deletar/{{id}}'><button>Deletar</button></a><br>
+        <small>Ingressou dia: {{createdAt}}</small>
+        <hr>
+    </div>
 {{/each}}
+
+<script>
+    function chamar(user) {
+        const userLogado = '{{user_logado}}';
+
+        if (userLogado !== user) {
+            const existingButton = document.querySelector(`button[data-user="${user}"]`);
+            if (existingButton) {
+                return;
+            }
+
+            const h3 = document.querySelector(`.users[data-user="${user}"] h3`);
+            const btn = document.createElement('button');
+            btn.textContent = 'Adicionar amigo';
+            btn.setAttribute('data-user', user);
+            btn.onclick = function() {
+                btn.textContent = 'Pedido enviado'
+            };
+            h3.appendChild(btn);
+            }
+
+        }
+</script>
