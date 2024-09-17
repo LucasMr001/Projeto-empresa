@@ -1,29 +1,37 @@
 <p style="font-size: larger;">
-    Olá, <i><b>{{user_logado}}</b></i>! Aqui está a lista de todos os usuários cadastrados!
-    <a href="/login"><button>voltar</button></a>
+    <div class="welcome_mensage" style="font-size: 20px; margin: 15px">
+        Bem vindo, faça login para começar a conhecer pessoas!
+    </div>
+    <button class="notif">Você não tem nenhuma solicitação</button>
 </p>
 
 {{#each listaUsuarios}}
     <div class="users" data-user="{{user}}" data-id="{{id}}">
-        <img src="{{photo}}" style="height: 90px; border-radius: 50px;" onload="chamar('{{user}}', '{{id}}')">
+        <img src="{{photo}}" style="height: 90px; border-radius: 50px;" onload="chamar('{{user}}', '{{id}}', '{{solic}}')">
         <h3 class="h3">{{user}}</h3>
         <div class="add_div" data-user="{{user}}">
         </div>
-        <a href='/deletar/{{id}}'><button>Deletar</button></a><br>
+        <a href='/deletar/{{id}}'><button style="background: #d4436c; color:aliceblue">Deletar</button></a><br>
         <small>Ingressou dia: {{createdAt}}</small>
         <hr>
     </div>
 {{/each}}
 
 <script>
-    function chamar(user, id) {
+    const welcome_mensage = document.querySelector('.welcome_mensage');
+    function chamar(user, id, solic) {
         const userLogado = '{{user_logado}}';
+    if(userLogado){
+        welcome_mensage.innerHTML = `Olá, <i><b>${userLogado}</b></i>! Suas sugestões de amizade já estão disponíveis!`
+    }
+        const notif = document.querySelector(`.notif`);
 
         if (userLogado !== user) {
             const existingButton = document.querySelector(`button[data-user="${user}"]`);
         if (existingButton) {
             return;
         }
+
 
         const add_div = document.querySelector(`.add_div[data-user="${user}"]`);
         const href = document.createElement('a');
@@ -36,7 +44,11 @@
         };
         add_div.appendChild(href);
         href.appendChild(btn);
-    }
+    } else if(solic){
+            notif.style.background = '#00A2E8';
+            notif.style.color = 'white';
+            notif.innerHTML = `Solicitações de amizade: <b>${solic}</b>`;
+        }
 
     }
 </script>
