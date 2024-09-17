@@ -37,7 +37,7 @@ app.post('/confirmlogin', async (req, res) => {
 
             if(user_exist){
                 user_logado = username;
-                res.redirect('/empresa')
+                res.redirect('/MakingConnections')
             } else{
                 setTimeout(()=>{
                     res.redirect('/login')
@@ -61,7 +61,7 @@ app.post('/confirmlogin', async (req, res) => {
                     photo: rndPhoto()
                 }).then(function(){
                     user_logado = username;
-                res.redirect("/empresa")
+                res.redirect("/MakingConnections")
             }).catch(function(erro){
                 res.send(`Ocorreu o erro: ${erro}`)
             })
@@ -76,15 +76,16 @@ app.post('/confirmlogin', async (req, res) => {
         }, 100);
     }
 })
-app.get('/empresa', function(req,res){
+app.get('/MakingConnections', function(req,res){
     Usuario.findAll({order: [['id', 'DESC']]}).then(function(listaUsuarios){
         res.render('home', {listaUsuarios: listaUsuarios, user_logado})
     })
 })
 
+
 app.get('/deletar/:id', function(req, res){
     Usuario.destroy({where: {id: req.params.id}}).then(function(){
-        res.redirect('/empresa');
+        res.redirect('/MakingConnections');
         console.log(`Usuario deletado`)
     }).catch(function(erro){
         console.log(`Ocorreu o erro ${erro}`)
@@ -101,16 +102,16 @@ app.get('/add/:id', function(req, res) {
             let solicitudes = Array.isArray(user.solic) ? user.solic : [];
 
             // verifica se a solicitação já está no json para não repetir
-            if (!solicitudes.includes(newRequest)) {
+            if (!solicitudes.includes(newRequest) && newRequest) {
                 solicitudes.push(newRequest);
 
             return Usuario.update({ solic: solicitudes },{ where: { id: userId } }
             )}
         }).then(() => {
-            console.log(`Usuário atualizado com sucesso`);
-            res.redirect('/empresa');
+            setTimeout(()=>{
+                res.redirect('/MakingConnections');
+            },500)
         }).catch(erro => {
-            console.log(`Ocorreu o erro ${erro}`);
             res.status(500).send(`Erro ao atualizar usuário: ${erro}`);
         });
 });
