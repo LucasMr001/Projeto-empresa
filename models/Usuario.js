@@ -9,10 +9,12 @@ const Usuario = db.sequelize.define('usuarios', {
     },
     photo: {
         type: db.Sequelize.TEXT
+    },
+    solic: {
+        type: db.Sequelize.JSON
     }
 })
 
-// Cria tabela sempre que executa:
 //Usuario.sync({force:true})
 
 module.exports = Usuario

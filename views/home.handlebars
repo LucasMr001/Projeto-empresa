@@ -5,8 +5,10 @@
 
 {{#each listaUsuarios}}
     <div class="users" data-user="{{user}}" data-id="{{id}}">
-        <img src="{{photo}}" style="height: 90px; border-radius: 50px;" onload="chamar('{{user}}')">
+        <img src="{{photo}}" style="height: 90px; border-radius: 50px;" onload="chamar('{{user}}', '{{id}}')">
         <h3 class="h3">{{user}}</h3>
+        <div class="add_div" data-user="{{user}}">
+        </div>
         <a href='/deletar/{{id}}'><button>Deletar</button></a><br>
         <small>Ingressou dia: {{createdAt}}</small>
         <hr>
@@ -14,24 +16,27 @@
 {{/each}}
 
 <script>
-    function chamar(user) {
+    function chamar(user, id) {
         const userLogado = '{{user_logado}}';
 
         if (userLogado !== user) {
             const existingButton = document.querySelector(`button[data-user="${user}"]`);
-            if (existingButton) {
-                return;
-            }
-
-            const h3 = document.querySelector(`.users[data-user="${user}"] h3`);
-            const btn = document.createElement('button');
-            btn.textContent = 'Adicionar amigo';
-            btn.setAttribute('data-user', user);
-            btn.onclick = function() {
-                btn.textContent = 'Pedido enviado'
-            };
-            h3.appendChild(btn);
-            }
-
+        if (existingButton) {
+            return;
         }
+
+        const add_div = document.querySelector(`.add_div[data-user="${user}"]`);
+        const href = document.createElement('a');
+        const btn = document.createElement('button');
+        btn.textContent = 'Adicionar amigo';
+        btn.setAttribute('data-user', user);
+        href.setAttribute('href', `/add/${id}`);
+        btn.onclick = function() {
+            btn.textContent = 'Pedido enviado'
+        };
+        add_div.appendChild(href);
+        href.appendChild(btn);
+    }
+
+    }
 </script>
